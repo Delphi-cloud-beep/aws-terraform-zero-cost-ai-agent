@@ -1,4 +1,5 @@
 import json
+import os
 import boto3
 
 # Initialisation des clients AWS (S3 pour les docs, Bedrock pour l'IA)
@@ -6,7 +7,7 @@ s3_client = boto3.client('s3')
 bedrock_client = boto3.client('bedrock-runtime', region_name='us-east-1')
 
 # Configuration (Ces valeurs correspondront à notre infrastructure Terraform)
-BUCKET_NAME = "mon-agent-ia-knowledge-base-portfolio-xyz-2026"
+BUCKET_NAME = os.environ.get('KNOWLEDGE_BASE_BUCKET')
 FILE_NAME = "connaissances.txt"
 
 def lambda_handler(event, context):

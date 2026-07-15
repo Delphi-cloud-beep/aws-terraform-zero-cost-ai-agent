@@ -1,19 +1,24 @@
 # Compresse automatiquement le dossier src/ en fichier ZIP
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_dir  = "${path.module}/src"
-  output_path = "${path.module}/lambda_function.zip"
+  source_dir  = "${path.module}/../../src" # Pointe vers votre dossier de code source racine
+  output_path = "${path.module}/../../lambda_function.zip"
 }
 
-# Crée la fonction Lambda
 resource "aws_lambda_function" "ia_agent" {
   filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "ia_agent_portfolio"
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+  function_name    = "agent-ia-${var.environment}"
   role             = aws_iam_role.lambda_role.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.11"
-  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  timeout          = 30 # L'IA peut mettre quelques secondes à répondre
+
+  
+  environment {
+    variables = {
+      KNOWLEDGE_BASE_BUCKET = var.bucket_name
+    }
+  }
 }
 
 # Crée l'API Gateway au format HTTP (léger et gratuit)

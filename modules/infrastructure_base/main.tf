@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_budgets_budget" "finops_alert" {
-  name              = "budget-zero-dollar"
+  name              = "budget-zero-dollar-${var.environment}"
   budget_type       = "COST"
   limit_amount      = "1.0"
   limit_unit        = "USD"

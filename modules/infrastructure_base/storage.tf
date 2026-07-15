@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "knowledge_base" {
-  bucket        = "mon-agent-ia-knowledge-base-portfolio-xyz-2026" 
+  bucket        = var.bucket_name
   force_destroy = true # Permet de supprimer le bucket même s'il contient votre fichier texte lors du destroy
 }
 
