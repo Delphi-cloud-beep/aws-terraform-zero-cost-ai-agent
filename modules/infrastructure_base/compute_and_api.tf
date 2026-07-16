@@ -25,6 +25,12 @@ resource "aws_lambda_function" "ia_agent" {
 resource "aws_apigatewayv2_api" "http_api" {
   name          = "ia-agent-api"
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = ["*"]
+    allow_methods = ["POST", "OPTIONS", "GET"]
+    allow_headers = ["content-type", "authorization"]
+    max_age       = 300
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {

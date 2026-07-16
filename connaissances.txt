@@ -1,4 +1,16 @@
 Bienvenue dans la base de connaissances secrète de MyCloudCorp.
 Notre code d'accès pour la salle des serveurs est le 8421.
 Le responsable de la sécurité informatique s'appelle Alexandre.
+
 Notre politique de télétravail autorise un maximum de 3 jours par semaine.
+Les horaires d'ouverture des bureaux sont de 9h à 18h.
+Le contact pour le support technique est support@mycloudcorp.com.
+
+Vie pratique au bureau :
+Le réseau Wi-Fi des employés est "MyCloudCorp_Secure" (Mot de passe: CloudPass2026!).
+Les tickets restaurant sont financés à 60% par l'entreprise.
+La cuisine commune dispose d'une machine à café gratuite, les capsules sont dans le tiroir de gauche.
+
+Processus RH :
+Les demandes de congés doivent être validées par le manager via le portail RH.
+Les notes de frais de déplacement doivent être envoyées avant le 25 de chaque mois à compta@mycloudcorp.com.

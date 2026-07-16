@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Agent IA - MyCloudCorp</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .chat-container { width: 450px; background: white; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; height: 600px; }
+        .chat-header { background: #232f3e; color: white; padding: 20px; text-align: center; font-weight: bold; font-size: 1.1em; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 10px 15px; border-radius: 8px; max-width: 80%; word-wrap: break-word; }
+        .message.user { background: #007bff; color: white; align-self: flex-end; }
+        .message.agent { background: #e9ecef; color: #333; align-self: flex-start; }
+        .chat-input-area { display: flex; padding: 15px; background: #fafafa; border-top: 1px solid #eee; }
+        .chat-input-area input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; outline: none; }
+        .chat-input-area button { background: #ff9900; border: none; color: white; padding: 10px 15px; margin-left: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .chat-input-area button:hover { background: #ec7211; }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">🤖 Agent IA - Support Interne</div>
+    <div id="chat-messages" class="chat-messages">
+        <div class="message agent">Bonjour ! Je suis l'agent IA de MyCloudCorp. Posez-moi vos questions sur l'entreprise ou la sécurité.</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="user-input" placeholder="Posez votre question ici..." onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
+<script>
+   
+    const API_URL = "https://flpinezn52.execute-api.us-east-1.amazonaws.com/ask";
+
+    async function sendMessage() {
+        const inputField = document.getElementById("user-input");
+        const question = inputField.value.trim();
+        if (!question) return;
+
+        // Ajouter la question de l'utilisateur à l'écran
+        appendMessage(question, 'user');
+        inputField.value = "";
+
+        // Afficher un indicateur d'attente
+        const tempId = appendMessage("L'agent réfléchit...", 'agent');
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question: question })
+            });
+            const data = await response.json();
+            
+            // Mettre à jour le message d'attente avec la réponse finale de l'IA
+            document.getElementById(tempId).innerText = data.response;
+        } catch (error) {
+            document.getElementById(tempId).innerText = "Erreur : Impossible de contacter l'agent IA.";
+            console.error(error);
+        }
+    }
+
+    function appendMessage(text, sender) {
+        const messagesDiv = document.getElementById("chat-messages");
+        const msgBubble = document.createElement("div");
+        const msgId = "msg-" + Date.now();
+        msgBubble.id = msgId;
+        msgBubble.className = `message ${sender}`;
+        msgBubble.innerText = text;
+        messagesDiv.appendChild(msgBubble);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        return msgId;
+    }
+</script>
+</body>
+</html>
