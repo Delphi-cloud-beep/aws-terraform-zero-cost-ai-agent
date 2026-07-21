@@ -8,7 +8,7 @@ L'agent est capable de répondre intelligemment à des questions techniques ou m
 
 ## 🛠️ Architecture & Technologies
 
-L'infrastructure est entièrement _Serverless_, garantissant un coût de fonctionnement de **0 €** pour un usage de démonstration :
+L'infrastructure est entièrement Serverless, garantissant un coût de fonctionnement de **0 €** pour un usage de démonstration :
 
 - **Infrastructure as Code (IaC) :** Terraform (Modularité, Automatisation, Gestion du Cycle de vie).
 - **Moteur d'IA :** Amazon Bedrock avec le modèle de langage de dernière génération **Amazon Nova Micro** (`amazon.nova-micro-v1:0`).

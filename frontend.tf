@@ -1,6 +1,6 @@
 # 1. Création du bucket S3 pour le site statique
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket        = "mon-agent-ia-frontend-portfolio-zero-cost" 
+  bucket        = "mon-agent-ia-frontend-portfolio-zero-cost"
   force_destroy = true
 }
 

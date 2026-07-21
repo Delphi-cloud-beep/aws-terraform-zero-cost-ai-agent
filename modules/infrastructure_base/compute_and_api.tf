@@ -13,7 +13,7 @@ resource "aws_lambda_function" "ia_agent" {
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.11"
 
-  
+
   environment {
     variables = {
       KNOWLEDGE_BASE_BUCKET = var.bucket_name
