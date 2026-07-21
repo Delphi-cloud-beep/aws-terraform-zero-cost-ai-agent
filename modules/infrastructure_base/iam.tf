@@ -12,7 +12,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name = "ia_agent_lambda_policy-${var.environment}"
+  name        = "ia_agent_lambda_policy-${var.environment}"
   description = "IAM policy for AWS Lambda to access S3 and Bedrock"
 
   policy = jsonencode({
